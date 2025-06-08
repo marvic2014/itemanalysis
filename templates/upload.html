@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Upload{% endblock %}
+{% block content %}
+<div class="card shadow p-4">
+    <h4 class="mb-4 text-success">Step 1: Upload ZipGrade Excel File</h4>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label">Select Student Sample Percentage:
+                <span data-bs-toggle="tooltip" title="Choose 50% if students are fewer than 70.">
+                    <i class="bi bi-info-circle-fill text-secondary"></i>
+                </span>
+            </label>
+            <select name="percentage" class="form-select">
+                <option>Select %</option>
+                <option>27%</option>
+                <option>28%</option>
+                <option>29%</option>
+                <option>30%</option>
+                <option>50%</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Upload Excel File:
+                <span data-bs-toggle="tooltip" title="Download the 'Standard Format' Excel file from ZipGrade and upload it here.">
+                    <i class="bi bi-info-circle-fill text-secondary"></i>
+                </span>
+            </label>
+            <input type="file" name="file" class="form-control">
+        </div>
+
+        <div class="d-grid">
+            <button type="submit" class="btn btn-success">Generate Report</button>
+        </div>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="alert alert-warning mt-3" role="alert">
+          {{ messages[0] }}
+        </div>
+      {% endif %}
+    {% endwith %}
+</div>
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
+</script>
+{% endblock %}

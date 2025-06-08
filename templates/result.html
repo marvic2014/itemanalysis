@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Results{% endblock %}
+{% block content %}
+<div class="card shadow p-4">
+    <h4 class="mb-4 text-success">Step 2: Download Your Reports</h4>
+
+    {% if result.error %}
+        <div class="alert alert-danger">
+            Error: {{ result.error }}
+        </div>
+    {% else %}
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="{{ url_for('download', filename=result.excel) }}" class="link-success">📄 Excel Report</a>
+            </li>
+            <li class="list-group-item">
+                <a href="{{ url_for('download', filename=result.word) }}" class="link-success">📝 Word Report</a>
+            </li>
+        </ul>
+    {% endif %}
+</div>
+{% endblock %}
